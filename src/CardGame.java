@@ -55,7 +55,7 @@ public class CardGame {
 	
 	private static boolean IsStraight(ArrayList<Card> hand) {
 		Collections.sort(hand, Comparator.comparing(Card::getrank));
-			for(int i = 0; i<hand.size()-1;i++){
+			for(int i = 0; i<hand.size();i++){
 				if (hand.get(i).getrank()-1 != hand.get(i+1).getrank()){
 					return false;
 				}
