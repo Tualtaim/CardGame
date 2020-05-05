@@ -28,6 +28,9 @@ public class CardGame {
 			System.out.println("STRAIGHT");			
 		}
 		else if(IsPair(hand)) {
+			System.out.println("TRIPLE");
+		}
+		else if(IsPair(hand)) {
 			System.out.println("PAIR");
 		}
 		else {
@@ -46,6 +49,16 @@ public class CardGame {
 		}
 		return false;
 	}
+
+	private static boolean IsTriple(ArrayList<Card> hand){
+		Collections.sort(hand, Comparator.comparing(Card::getrank));
+		if (hand.get(0).getrank() == hand.get(2).getrank() || hand.get(2).getrank() == hand.get(4).getrank()){
+			return true;
+		}
+		return false;
+
+	}
+
 	private static boolean IsFlush(ArrayList<Card> hand) {
 		if(hand.get(0).getMaa().equals(hand.get(1).getMaa()) && hand.get(1).getMaa().equals(hand.get(2).getMaa()) &&hand.get(2).getMaa().equals(hand.get(3).getMaa())) {
 			return true;
@@ -54,6 +67,7 @@ public class CardGame {
 	}
 	
 	private static boolean IsStraight(ArrayList<Card> hand) {
+		//Sort cards into ascending order
 		Collections.sort(hand, Comparator.comparing(Card::getrank));
 			for(int i = 0; i<hand.size();i++){
 				if (hand.get(i).getrank()-1 != hand.get(i+1).getrank()){
