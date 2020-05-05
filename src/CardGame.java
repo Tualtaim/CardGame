@@ -13,9 +13,8 @@ public class CardGame {
 			System.out.print(card.getMaa() + " " + card.getrank());
 			System.out.println();
 			}
-		IsPair(hand);
-		IsFlush(hand);
-		CheckHand(hand);
+			
+			CheckHand(hand);
 		
 	}
 
