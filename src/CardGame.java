@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CardGame {
 
@@ -13,7 +15,7 @@ public class CardGame {
 			System.out.print(card.getMaa() + " " + card.getrank());
 			System.out.println();
 			}
-			
+
 			CheckHand(hand);
 		
 	}
@@ -21,10 +23,15 @@ public class CardGame {
 	private static void CheckHand(ArrayList<Card> hand) {
 		if(IsFlush(hand)) {
 			System.out.println("FLUSH");			
-		}else if(IsPair(hand)) {
+		}
+		else if(IsStraight(hand)){
+			System.out.println("STRAIGHT");			
+		}
+		else if(IsPair(hand)) {
 			System.out.println("PAIR");
-		}else {
-			System.out.print("High Card");		
+		}
+		else {
+			System.out.println("High Card");		
 		}
 		
 	}
@@ -44,6 +51,16 @@ public class CardGame {
 			return true;
 		}
 		return false;
+	}
+	
+	private static boolean IsStraight(ArrayList<Card> hand) {
+		Collections.sort(hand, Comparator.comparing(Card::getrank));
+			for(int i = 0; i<hand.size()-1;i++){
+				if (hand.get(i).getrank()-1 != hand.get(i+1).getrank()){
+					return false;
+				}
+			}	
+		return true;	
 	}
 	
 
