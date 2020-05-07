@@ -21,14 +21,23 @@ public class CardGame {
 	}
 
 	private static void CheckHand(ArrayList<Card> hand) {
-		if(IsFlush(hand)) {
+		if(IsFlush(hand) && IsStraight(hand)){
+			System.out.println("STRAIGHT FLUSH");
+		}
+		else if(IsFour(hand)){
+			System.out.println("FOUR OF A KIND");
+		}
+		else if(IsFlush(hand)) {
 			System.out.println("FLUSH");			
 		}
 		else if(IsStraight(hand)){
 			System.out.println("STRAIGHT");			
 		}
-		else if(IsPair(hand)) {
+		else if(IsTriple(hand)) {
 			System.out.println("TRIPLE");
+		}
+		else if(IsTwoPairs(hand)) {
+			System.out.println("TWO PAIRS");
 		}
 		else if(IsPair(hand)) {
 			System.out.println("PAIR");
@@ -56,6 +65,14 @@ public class CardGame {
 			return true;
 		}
 		return false;
+	}
+
+	private static boolean IsFour(ArrayList<Card> hand){
+		Collections.sort(hand, Comparator.comparing(Card::getrank));
+		if (hand.get(0).getrank() == hand.get(3).getrank() || hand.get(1).getrank() == hand.get(4).getrank()){
+			return true;
+		}
+		return false;
 
 	}
 
@@ -68,6 +85,7 @@ public class CardGame {
 	
 	private static boolean IsStraight(ArrayList<Card> hand) {
 		//Sort cards into ascending order
+		//TODO: add checking in case of an ace
 		Collections.sort(hand, Comparator.comparing(Card::getrank));
 			for(int i = 0; i<hand.size();i++){
 				if (hand.get(i).getrank()-1 != hand.get(i+1).getrank()){
@@ -77,6 +95,22 @@ public class CardGame {
 		return true;	
 	}
 	
+	private static boolean IsTwoPairs(ArrayList<Card> hand) {
+		//Count how many pairs
+		int counter = 0;
+		for (int i = 0; i < hand.size(); i++) {
+			for (int j = i+1; j < hand.size(); j++) {
+				if (hand.get(i).getrank() == hand.get(j).getrank()) {
+					counter++;
+				}
+			}
+		}
+		if(counter>1){
+			return true;
+		}
+		return false;
+	
+	}
 
 
 }
