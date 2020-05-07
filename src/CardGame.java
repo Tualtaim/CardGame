@@ -27,6 +27,9 @@ public class CardGame {
 		else if(IsFour(hand)){
 			System.out.println("FOUR OF A KIND");
 		}
+		else if(IsFullHouse(hand)){
+			System.out.println("FULL HOUSE");
+		}
 		else if(IsFlush(hand)) {
 			System.out.println("FLUSH");			
 		}
@@ -110,6 +113,18 @@ public class CardGame {
 		}
 		return false;
 	
+	}
+	private static boolean IsFullHouse(ArrayList<Card> hand) {
+		Collections.sort(hand, Comparator.comparing(Card::getrank));
+		if(hand.get(0).getrank()==hand.get(1).getrank()&&hand.get(2).getrank()==hand.get(4).getrank()){
+			return true;
+		}
+		else if(hand.get(0).getrank()==hand.get(2).getrank()&&hand.get(3).getrank()==hand.get(4).getrank()){
+			return true;
+		}
+		else {return false;}
+
+
 	}
 
 
